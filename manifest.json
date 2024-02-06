@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "name": "unbait",
+    "version": "1.0",
+    "description": "Reduces 'bait-iness' of YouTube thumbnails and titles.",
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.youtube.com/*"
+            ],
+            "js": [
+                "title.js",
+                "page-manager.js",
+                "unbait.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "unbait@test.com"
+        }
+    }
+}
