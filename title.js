@@ -1,44 +1,29 @@
-
-function replaceTitle(node, pageType) {
+// Calls the appropriate function depending on which page requested the update
+function replaceTitle(element, pageType) {
     switch (pageType) {
         case "watch":
-            replaceWatchTitle(node);
+            replaceWatchTitle(element);
             break;
 
         case "home":
-            replaceHomeTitle(node);
+            replaceHomeTitle(element);
             break;
 
         case "subscriptions":
-            replaceSubscriptionsTitle(node);
+            replaceSubscriptionsTitle(element);
+            break;
+
+        case "channels":
+            replaceChannelsTitle(element);
+            break;
+
+        case "playlist":
+            replacePlaylistTitle(element);
             break;
     }
 }
 
-function replaceWatchTitle(node) {
-    var updatedTitle = node.querySelector("#video-title").getAttribute("title");
-
-    updatedTitle = filterTitleText(updatedTitle);
-
-    node.querySelector("#video-title").innerText = updatedTitle;
-}
-
-function replaceHomeTitle(node) {
-    var updatedTitle = node.querySelector("#video-title-link").getAttribute("title");
-
-    updatedTitle = filterTitleText(updatedTitle);
-
-    node.querySelector("#video-title").innerText = updatedTitle;
-}
-
-function replaceSubscriptionsTitle(node) {
-    var updatedTitle = node.querySelector("#video-title-link").getAttribute("title");
-
-    updatedTitle = filterTitleText(updatedTitle);
-
-    node.querySelector("#video-title").innerText = updatedTitle;
-}
-
+// Makes all desired changes to title string
 function filterTitleText(originalTitle) {
     originalTitle = originalTitle.toLowerCase();
 
@@ -50,3 +35,49 @@ function filterTitleText(originalTitle) {
 
     return originalTitle;
 }
+
+function replaceWatchTitle(element) {
+    var sharedParentElement = element.closest("#dismissible");
+    var updatedTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
+
+    updatedTitle = filterTitleText(updatedTitle);
+
+    sharedParentElement.querySelector("#video-title").innerText = updatedTitle;
+}
+
+function replaceHomeTitle(element) {
+    var sharedParentElement = element.closest("#dismissible");
+    var updatedTitle = sharedParentElement.querySelector("#video-title-link").getAttribute("title");
+
+    updatedTitle = filterTitleText(updatedTitle);
+
+    sharedParentElement.querySelector("#video-title").innerText = updatedTitle;
+}
+
+function replaceSubscriptionsTitle(element) {
+    var sharedParentElement = element.closest("#dismissible");
+    var updatedTitle = sharedParentElement.querySelector("#video-title-link").getAttribute("title");
+
+    updatedTitle = filterTitleText(updatedTitle);
+
+    sharedParentElement.querySelector("#video-title").innerText = updatedTitle;
+}
+
+function replaceChannelsTitle(element) {
+    var sharedParentElement = element.closest("#dismissible");
+    var updatedTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
+
+    updatedTitle = filterTitleText(updatedTitle);
+
+    sharedParentElement.querySelector("#video-title").innerText = updatedTitle;
+}
+
+function replacePlaylistTitle(element) {
+    var sharedParentElement = element.closest("#container");
+    var updatedTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
+
+    updatedTitle = filterTitleText(updatedTitle);
+
+    sharedParentElement.querySelector("#video-title").innerText = updatedTitle;
+}
+
