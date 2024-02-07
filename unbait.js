@@ -1,19 +1,12 @@
-// Planned options:
-//   - lowercasify titles
-//   - replace thumbnail with video preview image
-//
-//   - remove shorts banner (low prio)
+const pageManagers = [];
 
 init(document.getElementById("page-manager"));
 
-const pageManagers = [];
-
-
 // Initial app setup
-// Create MutationObserver which watches for changes in a specific DOM element
+// Create MutationObserver which watches for changes in the YouTube page-manager
 // Set a callback function to run when changes are detected
-function init(targetNode) {
-    // Options for the observer (which mutations to observe)
+function init(targetElement) {
+
     const config = {
         attributes: false,
         childList: true,
@@ -28,9 +21,6 @@ function init(targetNode) {
 
             const newManager = new PageManager(mutation.addedNodes[0]);
             pageManagers.push(newManager);
-
-            console.log(`new page manager created: ${newManager.toString()}`);
-            console.log(`current number of page managers: ${pageManagers.length}`);
         }
     };
 
@@ -38,6 +28,6 @@ function init(targetNode) {
     const observer = new MutationObserver(callback);
 
     // Start observing the target node for configured mutations
-    observer.observe(targetNode, config);
+    observer.observe(targetElement, config);
 }
 

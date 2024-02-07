@@ -27,14 +27,15 @@ class PageManager {
                         if (element.querySelector("span#title").innerText !== "Shorts")
                             continue;
 
-                        console.log("Shorts section removed");
                         element.remove();
+
+                        // After removing it will not put another shorts banner up
+                        this.shortsObserver.disconnect();
                     }
 
                 }
             });
 
-            // Start observing only changes to direct children
             this.shortsObserver.observe(this.shortsParentElement, {
                 attributes: false,
                 childList: true,
@@ -61,7 +62,6 @@ class PageManager {
             }
         });
 
-        // Start observing the target element for all mutations
         this.observer.observe(targetElement, {
             attributes: true,
             childList: true,
