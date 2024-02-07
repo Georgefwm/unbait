@@ -12,23 +12,15 @@ class PageManager {
 
         this.observer = new MutationObserver((mutationList, _observer) => {
             for (const mutation of mutationList) {
-                // if (this.page === "watch") {
-                //     if (mutation.target.closest("#dismissible") != null) {
-                //         console.log(mutation);
-                //     }
-                // }
-
                 if (mutation.type !== "attributes")
                     break;
-
-                // if (mutation.attributeName === "loaded")
-                //     this.updateVideo(mutation.target);
 
                 var element = mutation.target;
 
                 if (!element)
                     break;
 
+                // this is the identifier we use for videos being ready to scan
                 if (!element.classList.contains("yt-core-image--loaded"))
                     break;
 
