@@ -57,11 +57,8 @@ function replaceHomeThumbnail(element) {
 
     var imageElement = sharedParentElement.querySelector(`img.yt-core-image`);
 
-    if (!shouldReplaceImageLink(imageElement.src)) {
-        console.log("no replacing")
-
+    if (!shouldReplaceImageLink(imageElement.src))
         return;
-    }
 
     var newThumbnailLink = getReplacementImageLink(
         sharedParentElement.querySelector("a#thumbnail").getAttribute("href")
@@ -77,11 +74,8 @@ function replaceSubscriptionThumbnail(element) {
 
     var imageElement = sharedParentElement.querySelector(`img.yt-core-image`);
 
-    if (!shouldReplaceImageLink(imageElement.src)) {
-        console.log("no replacing")
-
+    if (!shouldReplaceImageLink(imageElement.src))
         return;
-    }
 
     var newThumbnailLink = getReplacementImageLink(
         sharedParentElement.querySelector("a#thumbnail").getAttribute("href")
@@ -97,11 +91,8 @@ function replaceChannelsThumbnail(element) {
 
     var imageElement = sharedParentElement.querySelector(`img.yt-core-image`);
 
-    if (!shouldReplaceImageLink(imageElement.src)) {
-        console.log("no replacing")
-
+    if (!shouldReplaceImageLink(imageElement.src))
         return;
-    }
 
     var newThumbnailLink = getReplacementImageLink(
         sharedParentElement.querySelector("a#thumbnail").getAttribute("href")
@@ -117,11 +108,8 @@ function replacePlaylistThumbnail(element) {
 
     var imageElement = sharedParentElement.querySelector(`img.yt-core-image`);
 
-    if (!shouldReplaceImageLink(imageElement.src)) {
-        console.log("no replacing")
-
+    if (!shouldReplaceImageLink(imageElement.src))
         return;
-    }
 
     var newThumbnailLink = getReplacementImageLink(
         sharedParentElement.querySelector("a#thumbnail").getAttribute("href")
