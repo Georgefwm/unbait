@@ -1,7 +1,12 @@
+// One PageManager is assigned for every YouTube page type (home, watch, subs , etc)
+// allows for dynamic startup as YouTube creates the page types on demand
 class PageManager {
     observer;
     element;
     page;
+
+    shortsObserver;
+    shortsParentElement;
 
     constructor(targetElement) {
         this.element = targetElement;
@@ -10,6 +15,34 @@ class PageManager {
         if (!this.page)
             this.page = "watch";
 
+        this.shortsParentElement = targetElement.querySelector("#contents");
+
+        if (this.shortsParentElement) {
+            this.shortsObserver = new MutationObserver((mutationList, _observer) => {
+                for (const mutation of mutationList) {
+                    for (const element of mutation.addedNodes) {
+                        if (element.nodeName !== "YTD-RICH-SECTION-RENDERER")
+                            continue;
+
+                        if (element.querySelector("span#title").innerText !== "Shorts")
+                            continue;
+
+                        console.log("Shorts section removed");
+                        element.remove();
+                    }
+
+                }
+            });
+
+            // Start observing only changes to direct children
+            this.shortsObserver.observe(this.shortsParentElement, {
+                attributes: false,
+                childList: true,
+                subtree: false
+            });
+        }
+
+        // when relevant change is made, update title and thumbnail
         this.observer = new MutationObserver((mutationList, _observer) => {
             for (const mutation of mutationList) {
                 if (mutation.type !== "attributes")
@@ -28,7 +61,7 @@ class PageManager {
             }
         });
 
-        // Start observing the target element for configured mutations
+        // Start observing the target element for all mutations
         this.observer.observe(targetElement, {
             attributes: true,
             childList: true,
