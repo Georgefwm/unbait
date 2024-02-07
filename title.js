@@ -1,5 +1,5 @@
 // Calls the appropriate function depending on which page requested the update
-function replaceTitle(element, pageType) {
+async function replaceTitle(element, pageType) {
     switch (pageType) {
         case "watch":
             replaceWatchTitle(element);
