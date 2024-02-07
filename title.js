@@ -38,46 +38,46 @@ function filterTitleText(originalTitle) {
 
 function replaceWatchTitle(element) {
     var sharedParentElement = element.closest("#dismissible");
-    var updatedTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
+    var newTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
 
-    updatedTitle = filterTitleText(updatedTitle);
+    newTitle = filterTitleText(newTitle);
 
-    sharedParentElement.querySelector("#video-title").innerText = updatedTitle;
+    sharedParentElement.querySelector("#video-title").innerText = newTitle;
 }
 
 function replaceHomeTitle(element) {
     var sharedParentElement = element.closest("#dismissible");
-    var updatedTitle = sharedParentElement.querySelector("#video-title-link").getAttribute("title");
+    var newTitle = sharedParentElement.querySelector("#video-title-link").getAttribute("title");
 
-    updatedTitle = filterTitleText(updatedTitle);
+    newTitle = filterTitleText(newTitle);
 
-    sharedParentElement.querySelector("#video-title").innerText = updatedTitle;
+    sharedParentElement.querySelector("#video-title").innerText = newTitle;
 }
 
 function replaceSubscriptionsTitle(element) {
     var sharedParentElement = element.closest("#dismissible");
-    var updatedTitle = sharedParentElement.querySelector("#video-title-link").getAttribute("title");
+    var newTitle = sharedParentElement.querySelector("#video-title-link").getAttribute("title");
 
-    updatedTitle = filterTitleText(updatedTitle);
+    newTitle = filterTitleText(newTitle);
 
-    sharedParentElement.querySelector("#video-title").innerText = updatedTitle;
+    sharedParentElement.querySelector("#video-title").innerText = newTitle;
 }
 
 function replaceChannelsTitle(element) {
     var sharedParentElement = element.closest("#dismissible");
-    var updatedTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
+    var newTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
 
-    updatedTitle = filterTitleText(updatedTitle);
+    newTitle = filterTitleText(newTitle);
 
-    sharedParentElement.querySelector("#video-title").innerText = updatedTitle;
+    sharedParentElement.querySelector("#video-title").innerText = newTitle;
 }
 
 function replacePlaylistTitle(element) {
     var sharedParentElement = element.closest("#container");
-    var updatedTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
+    var newTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
 
-    updatedTitle = filterTitleText(updatedTitle);
+    newTitle = filterTitleText(newTitle);
 
-    sharedParentElement.querySelector("#video-title").innerText = updatedTitle;
+    sharedParentElement.querySelector("#video-title").innerText = newTitle;
 }
 
