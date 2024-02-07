@@ -1,19 +1,19 @@
-function replaceThumbnail(node, pageType) {
+function replaceThumbnail(element, pageType) {
     switch (pageType) {
         case "watch":
-            replaceWatchThumbnail(node);
+            replaceWatchThumbnail(element);
             break;
 
         case "home":
-            replaceHomeThumbnail(node);
+            replaceHomeThumbnail(element);
             break;
     }
 }
 
-function replaceWatchThumbnail(node) {
+function replaceWatchThumbnail(element) {
 
 }
 
-function replaceHomeThumbnail(node) {
+function replaceHomeThumbnail(element) {
 
 }

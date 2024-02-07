@@ -10,6 +10,7 @@
             ],
             "js": [
                 "title.js",
+                "thumbnail.js",
                 "page-manager.js",
                 "unbait.js"
             ],
