@@ -1,39 +1,52 @@
 class PageManager {
     observer;
-    node;
+    element;
     page;
 
-    constructor(targetNode) {
-        this.node = targetNode;
+    constructor(targetElement) {
+        this.element = targetElement;
 
-        this.page = targetNode.getAttribute("page-subtype");
+        this.page = targetElement.getAttribute("page-subtype");
         if (!this.page)
             this.page = "watch";
 
         this.observer = new MutationObserver((mutationList, _observer) => {
             for (const mutation of mutationList) {
+                // if (this.page === "watch") {
+                //     if (mutation.target.closest("#dismissible") != null) {
+                //         console.log(mutation);
+                //     }
+                // }
+
                 if (mutation.type !== "attributes")
                     break;
 
-                if (mutation.attributeName !== "loaded")
+                // if (mutation.attributeName === "loaded")
+                //     this.updateVideo(mutation.target);
+
+                var element = mutation.target;
+
+                if (!element)
                     break;
 
-                // Use the closest common parent of thumbnail and title elements 
-                this.updateVideo(mutation.target.closest("#dismissible"));
+                if (!element.classList.contains("yt-core-image--loaded"))
+                    break;
+
+                this.updateVideo(element);
             }
         });
 
-        // Start observing the target node for configured mutations
-        this.observer.observe(targetNode, {
+        // Start observing the target element for configured mutations
+        this.observer.observe(targetElement, {
             attributes: true,
             childList: true,
             subtree: true
         });
     }
 
-    updateVideo(node) {
-        replaceTitle(node, this.page);
-        replaceThumbnail(node, this.page);
+    updateVideo(element) {
+        replaceTitle(element, this.page);
+        replaceThumbnail(element, this.page);
     }
 
     toString() {
