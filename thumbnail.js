@@ -40,11 +40,8 @@ function replaceWatchThumbnail(element) {
 
     var imageElement = sharedParentElement.querySelector(`img.yt-core-image`);
 
-    if (!shouldReplaceImageLink(imageElement.src)) {
-        console.log("no replacing")
-
+    if (!shouldReplaceImageLink(imageElement.src))
         return;
-    }
 
     var newThumbnailLink = getReplacementImageLink(
         sharedParentElement.querySelector("a#thumbnail").getAttribute("href")
