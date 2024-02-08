@@ -61,7 +61,7 @@ class PageManager {
             }
         });
 
-        this.observer.observe(targetElement, {
+        this.observer.observe(this.element, {
             attributes: true,
             childList: true,
             subtree: true
