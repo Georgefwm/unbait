@@ -28,9 +28,6 @@ class PageManager {
                             continue;
 
                         element.remove();
-
-                        // After removing it will not put another shorts banner up
-                        this.shortsObserver.disconnect();
                     }
 
                 }
@@ -41,6 +38,8 @@ class PageManager {
                 childList: true,
                 subtree: false
             });
+
+            console.log(`unbait: New PageManager spawned - ${this.toString()}`);
         }
 
         // when relevant change is made, update title and thumbnail
