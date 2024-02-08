@@ -20,9 +20,13 @@ async function replaceThumbnail(element, pageType) {
 }
 
 function getReplacementImageLink(videoId) {
-    const strippedVideoId = videoId
-        .split("=")[1] // Remove prefix
-        .split("&")[0] // Remove suffix
+    var strippedVideoId = videoId;
+
+    if (strippedVideoId.includes("="))
+        strippedVideoId = strippedVideoId.split("=")[1] // Remove prefix
+
+    if (strippedVideoId.includes("&"))
+        strippedVideoId = strippedVideoId.split("&")[0]; // Remove suffix
 
     return `https://i1.ytimg.com/vi/${strippedVideoId}/2.jpg`;
 }
