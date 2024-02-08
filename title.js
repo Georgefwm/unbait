@@ -47,7 +47,13 @@ function replaceWatchTitle(element) {
 
 function replaceHomeTitle(element) {
     var sharedParentElement = element.closest("#dismissible");
-    var newTitle = sharedParentElement.querySelector("#video-title-link").getAttribute("title");
+    var titleLinkElement = sharedParentElement.querySelector("#video-title-link");
+
+    // This is null when video is an ad, in which case ignore
+    if (!newTitle)
+        return;
+
+    var newTitle = titleLinkElement.getAttribute("title");
 
     newTitle = filterTitleText(newTitle);
 
@@ -56,7 +62,13 @@ function replaceHomeTitle(element) {
 
 function replaceSubscriptionsTitle(element) {
     var sharedParentElement = element.closest("#dismissible");
-    var newTitle = sharedParentElement.querySelector("#video-title-link").getAttribute("title");
+    var titleLinkElement = sharedParentElement.querySelector("#video-title-link");
+
+    // This is null when video is an ad, in which case ignore
+    if (!newTitle)
+        return;
+
+    var newTitle = titleLinkElement.getAttribute("title");
 
     newTitle = filterTitleText(newTitle);
 
