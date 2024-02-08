@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "unbait",
     "version": "0.2.0",
     "description": "Reduces 'bait-iness' of YouTube thumbnails and titles.",
@@ -14,7 +14,7 @@
                 "page-manager.js",
                 "unbait.js"
             ],
-            "run_at": "document_idle"
+            "run_at": "document_end"
         }
     ],
     "icons": {
