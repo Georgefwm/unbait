@@ -1,122 +1,54 @@
-// const REGEX = /(^https:\/\/i1\.ytimg\.com\/vi\/)+(.{0,12})+(\/2\.jpg$)/; // More accurate, but heavier version
-const REGEX = /\/2\.jpg$/;
 
 async function replaceThumbnail(element, pageType) {
     switch (pageType) {
-        case "watch":
-            replaceWatchThumbnail(element);
-            break;
-
         case "home":
-            replaceHomeThumbnail(element);
-            break;
-
+        case "watch":
         case "subscriptions":
-            replaceSubscriptionThumbnail(element);
-            break;
-
         case "channels":
-            replaceChannelsThumbnail(element);
+        case "history":
+            replaceThumbnailDefault(element, "#dismissible");
             break;
 
         case "playlist":
-            replacePlaylistThumbnail(element);
+            replaceThumbnailDefault(element, "#container");
             break;
 
+        default:
+            replaceThumbnailDefault(element, "#dismissible");
+            break;
     }
 }
 
 function getReplacementImageLink(videoId) {
-    return `https://i1.ytimg.com/vi/${videoId}/2.jpg`;
+    const strippedVideoId = videoId
+        .split("=")[1] // Remove prefix
+        .split("&")[0] // Remove suffix
+
+    return `https://i1.ytimg.com/vi/${strippedVideoId}/2.jpg`;
 }
 
-// check if url is the default
+// True if string ENDS with "/2.jpg"
+const REGEX = /\/2\.jpg$/;
+// const REGEX = /(^https:\/\/i1\.ytimg\.com\/vi\/)+(.{0,12})+(\/2\.jpg$)/; // More accurate, but heavier version
+
+// Check if url is the default
 function shouldReplaceImageLink(link) {
     return !REGEX.exec(link);
 }
 
-function replaceWatchThumbnail(element) {
-    var sharedParentElement = element.closest("#dismissible");
-
+function replaceThumbnailDefault(element, sharedParentId) {
+    var sharedParentElement = element.closest(sharedParentId);
     var imageElement = sharedParentElement.querySelector(`img.yt-core-image`);
 
     if (!shouldReplaceImageLink(imageElement.src))
         return;
 
-    var newThumbnailLink = getReplacementImageLink(
-        sharedParentElement.querySelector("a#thumbnail").getAttribute("href")
-            .split("=")[1] // Remove prefix
-            .split("&")[0] // Remove suffix
-    );
+    var videoLinkElement = sharedParentElement.querySelector("a#thumbnail");
 
-    imageElement.src = newThumbnailLink;
-}
-
-function replaceHomeThumbnail(element) {
-    var sharedParentElement = element.closest("#dismissible");
-
-    var imageElement = sharedParentElement.querySelector(`img.yt-core-image`);
-
-    if (!shouldReplaceImageLink(imageElement.src))
+    // This is null when video is an ad, in which case ignore it
+    if (!videoLinkElement.hasAttribute("href"))
         return;
 
-    var newThumbnailLink = getReplacementImageLink(
-        sharedParentElement.querySelector("a#thumbnail").getAttribute("href")
-            .split("=")[1] // Remove prefix
-            .split("&")[0] // Remove suffix
-    );
-
-    imageElement.src = newThumbnailLink;
-}
-
-function replaceSubscriptionThumbnail(element) {
-    var sharedParentElement = element.closest("#dismissible");
-
-    var imageElement = sharedParentElement.querySelector(`img.yt-core-image`);
-
-    if (!shouldReplaceImageLink(imageElement.src))
-        return;
-
-    var newThumbnailLink = getReplacementImageLink(
-        sharedParentElement.querySelector("a#thumbnail").getAttribute("href")
-            .split("=")[1] // Remove prefix
-            .split("&")[0] // Remove suffix
-    );
-
-    imageElement.src = newThumbnailLink;
-}
-
-function replaceChannelsThumbnail(element) {
-    var sharedParentElement = element.closest("#dismissible");
-
-    var imageElement = sharedParentElement.querySelector(`img.yt-core-image`);
-
-    if (!shouldReplaceImageLink(imageElement.src))
-        return;
-
-    var newThumbnailLink = getReplacementImageLink(
-        sharedParentElement.querySelector("a#thumbnail").getAttribute("href")
-            .split("=")[1] // Remove prefix
-            .split("&")[0] // Remove suffix
-    );
-
-    imageElement.src = newThumbnailLink;
-}
-
-function replacePlaylistThumbnail(element) {
-    var sharedParentElement = element.closest("#container");
-
-    var imageElement = sharedParentElement.querySelector(`img.yt-core-image`);
-
-    if (!shouldReplaceImageLink(imageElement.src))
-        return;
-
-    var newThumbnailLink = getReplacementImageLink(
-        sharedParentElement.querySelector("a#thumbnail").getAttribute("href")
-            .split("=")[1] // Remove prefix
-            .split("&")[0] // Remove suffix
-    );
-
-    imageElement.src = newThumbnailLink;
+    imageElement.src = getReplacementImageLink(videoLinkElement.getAttribute("href"));
 }
 
