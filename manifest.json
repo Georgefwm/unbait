@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "unbait",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Reduces 'bait-iness' of YouTube thumbnails and titles.",
     "content_scripts": [
         {
