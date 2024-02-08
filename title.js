@@ -17,7 +17,7 @@ async function replaceTitle(element, pageType) {
             break;
 
         default:
-            replaceTitleDefault(element, "#dismissible", "video-title-link");
+            replaceTitleDefault(element, "#dismissible", "#video-title-link");
             break;
     }
 }
