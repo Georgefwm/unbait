@@ -1,24 +1,23 @@
 // Calls the appropriate function depending on which page requested the update
 async function replaceTitle(element, pageType) {
     switch (pageType) {
-        case "watch":
-            replaceWatchTitle(element);
-            break;
-
         case "home":
-            replaceHomeTitle(element);
-            break;
-
         case "subscriptions":
-            replaceSubscriptionsTitle(element);
+            replaceTitleDefault(element, "#dismissible", "#video-title-link");
             break;
 
+        case "watch":
         case "channels":
-            replaceChannelsTitle(element);
+        case "history":
+            replaceTitleDefault(element, "#dismissible", "#video-title");
             break;
 
         case "playlist":
-            replacePlaylistTitle(element);
+            replaceTitleDefault(element, "#container", "#video-title");
+            break;
+
+        default:
+            replaceTitleDefault(element, "#dismissible", "video-title-link");
             break;
     }
 }
@@ -36,60 +35,14 @@ function filterTitleText(originalTitle) {
     return originalTitle;
 }
 
-function replaceWatchTitle(element) {
-    var sharedParentElement = element.closest("#dismissible");
-    var newTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
-
-    newTitle = filterTitleText(newTitle);
-
-    sharedParentElement.querySelector("#video-title").innerText = newTitle;
-}
-
-function replaceHomeTitle(element) {
-    var sharedParentElement = element.closest("#dismissible");
-    var titleLinkElement = sharedParentElement.querySelector("#video-title-link");
+function replaceTitleDefault(element, sharedParentId, titleLinkElementId) {
+    var sharedParentElement = element.closest(sharedParentId);
+    var titleLinkElement = sharedParentElement.querySelector(titleLinkElementId);
 
     // This is null when video is an ad, in which case ignore
-    if (!newTitle)
+    if (!titleLinkElement)
         return;
 
-    var newTitle = titleLinkElement.getAttribute("title");
-
-    newTitle = filterTitleText(newTitle);
-
-    sharedParentElement.querySelector("#video-title").innerText = newTitle;
-}
-
-function replaceSubscriptionsTitle(element) {
-    var sharedParentElement = element.closest("#dismissible");
-    var titleLinkElement = sharedParentElement.querySelector("#video-title-link");
-
-    // This is null when video is an ad, in which case ignore
-    if (!newTitle)
-        return;
-
-    var newTitle = titleLinkElement.getAttribute("title");
-
-    newTitle = filterTitleText(newTitle);
-
-    sharedParentElement.querySelector("#video-title").innerText = newTitle;
-}
-
-function replaceChannelsTitle(element) {
-    var sharedParentElement = element.closest("#dismissible");
-    var newTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
-
-    newTitle = filterTitleText(newTitle);
-
-    sharedParentElement.querySelector("#video-title").innerText = newTitle;
-}
-
-function replacePlaylistTitle(element) {
-    var sharedParentElement = element.closest("#container");
-    var newTitle = sharedParentElement.querySelector("#video-title").getAttribute("title");
-
-    newTitle = filterTitleText(newTitle);
-
-    sharedParentElement.querySelector("#video-title").innerText = newTitle;
+    sharedParentElement.querySelector("#video-title").innerText = filterTitleText(titleLinkElement.getAttribute("title"));
 }
 
