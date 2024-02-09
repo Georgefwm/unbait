@@ -11,26 +11,15 @@ class PageManager {
     constructor(targetElement) {
         this.element = targetElement;
 
-        this.page = targetElement.getAttribute("page-subtype");
+        this.page = this.element.getAttribute("page-subtype");
         if (!this.page)
             this.page = "watch";
 
-        this.shortsParentElement = targetElement.querySelector("#contents");
+        this.shortsParentElement = this.element.querySelector("#contents");
 
         if (this.shortsParentElement) {
             this.shortsObserver = new MutationObserver((mutationList, _observer) => {
-                for (const mutation of mutationList) {
-                    for (const element of mutation.addedNodes) {
-                        if (element.nodeName !== "YTD-RICH-SECTION-RENDERER")
-                            continue;
-
-                        if (element.querySelector("span#title").innerText !== "Shorts")
-                            continue;
-
-                        element.remove();
-                    }
-
-                }
+                this.removeShorts(this.shortsParentElement.children);
             });
 
             this.shortsObserver.observe(this.shortsParentElement, {
@@ -38,8 +27,6 @@ class PageManager {
                 childList: true,
                 subtree: false
             });
-
-            console.log(`unbait: New PageManager spawned - ${this.toString()}`);
         }
 
         // when relevant change is made, update title and thumbnail
@@ -75,5 +62,19 @@ class PageManager {
 
     toString() {
         return `PageManager: { page: ${this.page} }`;
+    }
+
+    async removeShorts(elementList) {
+        for (var element of elementList) {
+            if (element.nodeName !== "YTD-RICH-SECTION-RENDERER")
+                continue;
+
+            if (element.querySelector("span#title").innerText !== "Shorts")
+                continue;
+
+            console.log(element);
+            this.shortsParentElement.removeChild(element);
+            return;
+        }
     }
 }
