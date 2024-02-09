@@ -72,7 +72,6 @@ class PageManager {
             if (element.querySelector("span#title").innerText !== "Shorts")
                 continue;
 
-            console.log(element);
             this.shortsParentElement.removeChild(element);
             return;
         }
