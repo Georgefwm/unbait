@@ -11,9 +11,6 @@ A simple web-extention to make YouTube less bait(y) and stimulating
 ### Firefox
 Install from the Firefox [addon store](https://addons.mozilla.org/en-US/firefox/addon/unbait/)
 
-### Chrome (Coming soon the chrome store)
-Download latest release
-Add as an unpacked extention in [extentions](chrome://extensions/)
+### Chrome
+Install from the Google [chrome store](https://chromewebstore.google.com/detail/unbait/goofilkndndkinihkdnopkjdilgfppmc)
 
-### Others
-Why?
