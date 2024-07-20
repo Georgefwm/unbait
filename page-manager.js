@@ -15,11 +15,23 @@ class PageManager {
         if (!this.page)
             this.page = "watch";
 
-        this.shortsParentElement = this.element.querySelector("#contents");
-
+        // Remove shorts banners if found
+        this.shortsParentElement = this.element.querySelector("ytd-rich-grid-renderer div#contents");
         if (this.shortsParentElement) {
             this.shortsObserver = new MutationObserver((mutationList, _observer) => {
-                this.removeShorts(this.shortsParentElement.children);
+                // If the mutation was not adding a direct child then exit early
+                if (mutationList[0].type !== "childList" || mutationList[0].addedNodes.length <= 0)
+                    return;
+
+                for (var addedNode of mutationList[0].addedNodes) {
+                    if (addedNode.localName != "ytd-rich-section-renderer")
+                        continue;
+
+                    if (addedNode.querySelectorAll("ytd-rich-shelf-renderer[is-shorts]").length == 0)
+                        continue;
+
+                    addedNode.remove();                
+                }
             });
 
             this.shortsObserver.observe(this.shortsParentElement, {

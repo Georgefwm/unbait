@@ -28,6 +28,7 @@ function getReplacementImageLink(videoId) {
     if (strippedVideoId.includes("&"))
         strippedVideoId = strippedVideoId.split("&")[0]; // Remove suffix
 
+    // Uses YTs image server for preview thumbnails (annoyingly los res however)
     return `https://i1.ytimg.com/vi/${strippedVideoId}/2.jpg`;
 }
 
@@ -35,7 +36,7 @@ function getReplacementImageLink(videoId) {
 const REGEX = /\/2\.jpg$/;
 // const REGEX = /(^https:\/\/i1\.ytimg\.com\/vi\/)+(.{0,12})+(\/2\.jpg$)/; // More accurate, but heavier version
 
-// Check if url is the default
+// Check if thumbnail should be replaced based on URL string
 function shouldReplaceImageLink(link) {
     return !REGEX.exec(link);
 }
